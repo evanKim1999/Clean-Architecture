@@ -8,6 +8,10 @@
 import Foundation
 import Alamofire
 
+protocol NetworkManagerProctocol {
+    func fetchData<T: Decodable>(url: String, method: HTTPMethod, parameters: Parameters?) async -> Result<T,NetworkError>
+}
+
 public class NetworkManager {
     private let session: SessionProtocol
     
@@ -16,7 +20,7 @@ public class NetworkManager {
     }
     
     private let tokenHeader: HTTPHeaders = {
-        let tokenHeader = HTTPHeader(name: "Authorization", value: "Bearer ..")
+        let tokenHeader = HTTPHeader(name: "Authorization", value: "Bearer ...")
         
         return HTTPHeaders([tokenHeader])
     }()
