@@ -13,6 +13,10 @@ import RxCocoa
 class UserListViewController: UIViewController {
     private let viewModel: UserListViewModelProtocol
     private let disposeBag = DisposeBag()
+    private let saveFavorite = PublishRelay<UserListItem>()
+    private let deleteFavorite = PublishRelay<Int>()
+    private let fetchMore = PublishRelay<Void>()
+    
     private let searchTextField = {
         let textField = UITextField()
         textField.layer.borderWidth = 1
@@ -26,7 +30,13 @@ class UserListViewController: UIViewController {
         textField.tintColor = .black
         return textField
     }()
+    
     private let tabButtonView = TabButtonView(tabList: [.api, .favorite])
+    
+    private let tableView = {
+        let tableView = UITableView()
+        return tableView
+    }()
     
     init(viewModel: UserListViewModelProtocol) {
         self.viewModel = viewModel
@@ -34,15 +44,32 @@ class UserListViewController: UIViewController {
         view.backgroundColor = .white
         setUI()
         bindView()
+        bindViewModel()
     }
-    private func bindView() {
-        tabButtonView.selectedType.bind { type in
-            print("Type \(type)")
+    
+    private func bindViewModel() {
+        let tabButtonType = tabButtonView.selectedType.compactMap { $0 }
+        let query = searchTextField.rx.text.orEmpty.debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+        let output = viewModel.transform(input: UserListViewModel.Input(tabButtonType: tabButtonType, query: query, saveFavorite: saveFavorite.asObservable(), deleteFavorite: deleteFavorite.asObservable(), fetchMore: fetchMore.asObservable()))
+        
+        output.cellData.bind(to: tableView.rx.items) { tableView, index, item in
+            return UITableViewCell()
         }.disposed(by: disposeBag)
+        
+        output.error.bind { [weak self] errorMessage in
+            let alert = UIAlertController(title: "error", message: errorMessage, preferredStyle: .alert)
+            alert.addAction(.init(title: "확인", style: .default))
+            self?.present(alert, animated: true)
+        }.disposed(by: disposeBag)
+    }
+    
+    private func bindView() {
+
     }
     private func setUI() {
         view.addSubview(searchTextField)
         view.addSubview(tabButtonView)
+        view.addSubview(tableView)
         
         searchTextField.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -54,6 +81,11 @@ class UserListViewController: UIViewController {
             make.top.equalTo(searchTextField.snp.bottom).offset(6)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(tabButtonView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
     
