@@ -35,6 +35,8 @@ class UserListViewController: UIViewController {
     
     private let tableView = {
         let tableView = UITableView()
+        tableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.id)
+        tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: HeaderTableViewCell.id)
         return tableView
     }()
     
@@ -52,20 +54,43 @@ class UserListViewController: UIViewController {
         let query = searchTextField.rx.text.orEmpty.debounce(.milliseconds(300), scheduler: MainScheduler.instance)
         let output = viewModel.transform(input: UserListViewModel.Input(tabButtonType: tabButtonType, query: query, saveFavorite: saveFavorite.asObservable(), deleteFavorite: deleteFavorite.asObservable(), fetchMore: fetchMore.asObservable()))
         
-        output.cellData.bind(to: tableView.rx.items) { tableView, index, item in
-            return UITableViewCell()
+        output.cellData.bind(to: tableView.rx.items) { [weak self] tableView, index, cellData in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellData.id) else { return UITableViewCell() }
+            (cell as? UserListCellProtocol)?.apply(cellData: cellData)
+            
+            if let cell = cell as? UserTableViewCell, case let .user(user, isFavorite) = cellData {
+
+                cell.favoriteButton.rx.tap.bind {
+                    if isFavorite {
+                        self?.deleteFavorite.accept(user.id)
+                    } else {
+                        self?.saveFavorite.accept(user)
+                    }
+                }.disposed(by: cell.disposeBag)
+            }
+            return cell
         }.disposed(by: disposeBag)
         
-        output.error.bind { [weak self] errorMessage in
-            let alert = UIAlertController(title: "error", message: errorMessage, preferredStyle: .alert)
+        output.error
+            .observe(on: MainScheduler.instance) // ✅ UI 업데이트를 메인 스레드에서!
+            .bind { [weak self] errorMessage in
+            let alert = UIAlertController(title: "에러", message: errorMessage, preferredStyle: .alert)
             alert.addAction(.init(title: "확인", style: .default))
             self?.present(alert, animated: true)
         }.disposed(by: disposeBag)
     }
     
+    // pagenation
     private func bindView() {
-
+        tableView.rx.prefetchRows.bind { [weak self] indexPath in
+            guard let rows = self?.tableView.numberOfRows(inSection: 0), let itemIndex = indexPath.first?.item else { return }
+            if itemIndex >= rows - 1 {
+                self?.fetchMore.accept(())
+            }
+            // 현재 인덱스
+        }.disposed(by: disposeBag)
     }
+    
     private func setUI() {
         view.addSubview(searchTextField)
         view.addSubview(tabButtonView)
@@ -100,61 +125,3 @@ class UserListViewController: UIViewController {
 
 }
 
-final class TabButtonView: UIStackView {
-    private let tabList: [TabButtonType]
-    private let disposeBag = DisposeBag()
-    public let selectedType: BehaviorRelay<TabButtonType?>
-    init(tabList: [TabButtonType]) {
-        self.tabList = tabList
-        self.selectedType = BehaviorRelay(value: tabList.first)
-        super.init(frame: .zero)
-        alignment = .fill
-        distribution = .fillEqually
-        
-        addButtons()
-        (arrangedSubviews.first as? UIButton)?.isSelected = true
-    }
-    
-    private func addButtons() {
-        tabList.forEach { tabType in
-            let button = TabButton(type: tabType)
-            button.rx.tap.bind { [weak self] in
-                self?.arrangedSubviews.forEach { view in
-                    (view as? UIButton)?.isSelected = false
-                }
-                button.isSelected = true
-                self?.selectedType.accept(tabType)
-            }.disposed(by: disposeBag)
-            addArrangedSubview(button)
-        }
-    }
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-final class TabButton: UIButton {
-    private let type: TabButtonType
-    override var isSelected: Bool {
-        didSet {
-            if isSelected {
-                backgroundColor = .systemCyan
-            } else {
-                backgroundColor = .white
-            }
-        }
-    }
-    
-    init(type: TabButtonType) {
-        self.type = type
-        super.init(frame: .zero)
-        setTitle(type.rawValue, for: .normal)
-        titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
-        setTitleColor(.black, for: .normal)
-        setTitleColor(.white, for: .selected)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}

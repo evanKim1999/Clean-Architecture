@@ -19,7 +19,7 @@ final public class UserNetwork: UserNetworkProtocol{
     }
     
     public func fetchUser(query: String, page: Int) async -> Result<UserListResult, NetworkError> {
-        let url = "https://api.github.com/search/issues?q=\(query)&page=\(page)"
+        let url = "https://api.github.com/search/users?q=\(query)&page=\(page)"
         
         return await manager.fetchData(url: url, method: .get, parameters: nil)
         

@@ -123,7 +123,7 @@ public final class UserListViewModel: UserListViewModelProtocol {
             let result = await usecase.fetchUser(query: urlAllowedQuery, page: page)
             switch result {
             case let .success(users):
-                if page == 0 {//첫번째 페이지
+                if page == 1 {//첫번째 페이지
                     fetchUserList.accept(users.items)
                     
                 } else {//두번째 그 이상페이지
@@ -143,7 +143,7 @@ public final class UserListViewModel: UserListViewModelProtocol {
                 favoriteUserList.accept(users)
             } else { //검색어가 있을 때 필터링
                 let filteredUsers = users.filter { user in
-                    user.login.contains(query)
+                    user.login.contains(query.lowercased())
                 }
                 favoriteUserList.accept(filteredUsers)
             }
@@ -190,4 +190,15 @@ public enum TabButtonType: String{
 public enum UserListCellData {
     case user(user: UserListItem, isFavorite: Bool)
     case header(String)
+    
+    var id: String {
+        switch self {
+        case .header: HeaderTableViewCell.id
+        case .user: UserTableViewCell.id
+        }
+    }
+}
+
+protocol UserListCellProtocol {
+    func apply(cellData: UserListCellData)
 }
