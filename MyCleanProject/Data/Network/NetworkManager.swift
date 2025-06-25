@@ -12,7 +12,7 @@ protocol NetworkManagerProctocol {
     func fetchData<T: Decodable>(url: String, method: HTTPMethod, parameters: Parameters?) async -> Result<T,NetworkError>
 }
 
-public class NetworkManager {
+public class NetworkManager: NetworkManagerProctocol{
     private let session: SessionProtocol
     
     init(session: SessionProtocol) {

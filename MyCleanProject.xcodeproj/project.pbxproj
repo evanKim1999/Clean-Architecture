@@ -16,8 +16,6 @@
 		A779ED842E0AA0C300920C77 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ED7E2E0AA0C300920C77 /* SceneDelegate.swift */; };
 		A779ED852E0AA0C300920C77 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ED7F2E0AA0C300920C77 /* ViewController.swift */; };
 		A779ED862E0AA0C300920C77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A779ED772E0AA0C300920C77 /* Assets.xcassets */; };
-		A779ED882E0AA0C300920C77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A779ED7A2E0AA0C300920C77 /* LaunchScreen.storyboard */; };
-		A779ED892E0AA0C300920C77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A779ED7C2E0AA0C300920C77 /* Main.storyboard */; };
 		A779ED8C2E0AA0CB00920C77 /* MyCleanProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ED8A2E0AA0CB00920C77 /* MyCleanProjectTests.swift */; };
 		A779ED902E0AA0CE00920C77 /* MyCleanProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ED8D2E0AA0CE00920C77 /* MyCleanProjectUITests.swift */; };
 		A779ED912E0AA0CE00920C77 /* MyCleanProjectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ED8E2E0AA0CE00920C77 /* MyCleanProjectUITestsLaunchTests.swift */; };
@@ -25,9 +23,13 @@
 		A779ED982E0AA27800920C77 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ED972E0AA27800920C77 /* NetworkError.swift */; };
 		A779ED9A2E0AA3B600920C77 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ED992E0AA3B600920C77 /* CoreDataError.swift */; };
 		A779ED9C2E0AA4A200920C77 /* UserListUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ED9B2E0AA4A200920C77 /* UserListUsecase.swift */; };
-		A779ED9F2E0AA6EB00920C77 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ED9E2E0AA6EB00920C77 /* UserRepository.swift */; };
+		A779ED9F2E0AA6EB00920C77 /* UserRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ED9E2E0AA6EB00920C77 /* UserRepositoryProtocol.swift */; };
 		A77E37832E0ADAC3004D75B2 /* UserNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E37822E0ADAC3004D75B2 /* UserNetwork.swift */; };
 		A77E37852E0AED10004D75B2 /* UserCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E37842E0AED10004D75B2 /* UserCoreData.swift */; };
+		A77E37872E0AF2BE004D75B2 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E37862E0AF2BE004D75B2 /* UserRepository.swift */; };
+		A77E37892E0AF74B004D75B2 /* UserUsecaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E37882E0AF74B004D75B2 /* UserUsecaseTests.swift */; };
+		A77E378C2E0AF7EA004D75B2 /* MockUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E378B2E0AF7EA004D75B2 /* MockUserRepository.swift */; };
+		A7B382AE2E0C05EE00325C0F /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B382AD2E0C05EE00325C0F /* UserListViewModel.swift */; };
 		F76C7401D8340C8964C9377B /* Pods_MyCleanProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE426807DA60741B430B7D65 /* Pods_MyCleanProjectTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,8 +65,6 @@
 		A779ED762E0AA0C300920C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A779ED772E0AA0C300920C77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A779ED782E0AA0C300920C77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A779ED792E0AA0C300920C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A779ED7B2E0AA0C300920C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A779ED7E2E0AA0C300920C77 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A779ED7F2E0AA0C300920C77 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A779ED812E0AA0C300920C77 /* MyCleanProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyCleanProject.xcdatamodel; sourceTree = "<group>"; };
@@ -75,9 +75,13 @@
 		A779ED972E0AA27800920C77 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		A779ED992E0AA3B600920C77 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		A779ED9B2E0AA4A200920C77 /* UserListUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListUsecase.swift; sourceTree = "<group>"; };
-		A779ED9E2E0AA6EB00920C77 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		A779ED9E2E0AA6EB00920C77 /* UserRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryProtocol.swift; sourceTree = "<group>"; };
 		A77E37822E0ADAC3004D75B2 /* UserNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetwork.swift; sourceTree = "<group>"; };
 		A77E37842E0AED10004D75B2 /* UserCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoreData.swift; sourceTree = "<group>"; };
+		A77E37862E0AF2BE004D75B2 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		A77E37882E0AF74B004D75B2 /* UserUsecaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUsecaseTests.swift; sourceTree = "<group>"; };
+		A77E378B2E0AF7EA004D75B2 /* MockUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserRepository.swift; sourceTree = "<group>"; usesTabs = 0; };
+		A7B382AD2E0C05EE00325C0F /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
 		AE426807DA60741B430B7D65 /* Pods_MyCleanProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyCleanProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C53D17DE01FFEFF540389384 /* Pods_MyCleanProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyCleanProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1FF1596C38642FE2D736A17 /* Pods-MyCleanProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCleanProject.release.xcconfig"; path = "Target Support Files/Pods-MyCleanProject/Pods-MyCleanProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,13 +150,12 @@
 		A779ED802E0AA0C300920C77 /* MyCleanProject */ = {
 			isa = PBXGroup;
 			children = (
+				A7B382AB2E0C05CC00325C0F /* Presentation */,
 				A779EDA02E0ABC5600920C77 /* Data */,
 				A779ED922E0AA0D200920C77 /* Domain */,
 				A779ED762E0AA0C300920C77 /* AppDelegate.swift */,
 				A779ED772E0AA0C300920C77 /* Assets.xcassets */,
 				A779ED782E0AA0C300920C77 /* Info.plist */,
-				A779ED7A2E0AA0C300920C77 /* LaunchScreen.storyboard */,
-				A779ED7C2E0AA0C300920C77 /* Main.storyboard */,
 				A779ED7D2E0AA0C300920C77 /* MyCleanProject.xcdatamodeld */,
 				A779ED7E2E0AA0C300920C77 /* SceneDelegate.swift */,
 				A779ED7F2E0AA0C300920C77 /* ViewController.swift */,
@@ -164,6 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				A779ED8A2E0AA0CB00920C77 /* MyCleanProjectTests.swift */,
+				A77E37882E0AF74B004D75B2 /* UserUsecaseTests.swift */,
+				A77E378A2E0AF7DA004D75B2 /* Mock */,
 			);
 			path = MyCleanProjectTests;
 			sourceTree = "<group>";
@@ -208,7 +213,7 @@
 		A779ED9D2E0AA6C900920C77 /* RepositoryProtocol */ = {
 			isa = PBXGroup;
 			children = (
-				A779ED9E2E0AA6EB00920C77 /* UserRepository.swift */,
+				A779ED9E2E0AA6EB00920C77 /* UserRepositoryProtocol.swift */,
 			);
 			path = RepositoryProtocol;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 		A779EDA12E0ABC5C00920C77 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				A77E37862E0AF2BE004D75B2 /* UserRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -246,6 +252,30 @@
 				A77E37822E0ADAC3004D75B2 /* UserNetwork.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		A77E378A2E0AF7DA004D75B2 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				A77E378B2E0AF7EA004D75B2 /* MockUserRepository.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		A7B382AB2E0C05CC00325C0F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				A7B382AC2E0C05DF00325C0F /* ViewModel */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		A7B382AC2E0C05DF00325C0F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A7B382AD2E0C05EE00325C0F /* UserListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		AB7B50A333CE4D7616D95532 /* Pods */ = {
@@ -372,8 +402,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A779ED862E0AA0C300920C77 /* Assets.xcassets in Resources */,
-				A779ED882E0AA0C300920C77 /* LaunchScreen.storyboard in Resources */,
-				A779ED892E0AA0C300920C77 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,13 +540,15 @@
 				A779ED822E0AA0C300920C77 /* AppDelegate.swift in Sources */,
 				A7636E782E0AC48E006135EF /* UserSession.swift in Sources */,
 				A779ED962E0AA10D00920C77 /* UserListItem.swift in Sources */,
-				A779ED9F2E0AA6EB00920C77 /* UserRepository.swift in Sources */,
+				A779ED9F2E0AA6EB00920C77 /* UserRepositoryProtocol.swift in Sources */,
+				A7B382AE2E0C05EE00325C0F /* UserListViewModel.swift in Sources */,
 				A7636E7A2E0AC725006135EF /* NetworkManager.swift in Sources */,
 				A779ED832E0AA0C300920C77 /* MyCleanProject.xcdatamodeld in Sources */,
 				A779ED982E0AA27800920C77 /* NetworkError.swift in Sources */,
 				A779ED9C2E0AA4A200920C77 /* UserListUsecase.swift in Sources */,
 				A779ED842E0AA0C300920C77 /* SceneDelegate.swift in Sources */,
 				A77E37832E0ADAC3004D75B2 /* UserNetwork.swift in Sources */,
+				A77E37872E0AF2BE004D75B2 /* UserRepository.swift in Sources */,
 				A779ED852E0AA0C300920C77 /* ViewController.swift in Sources */,
 				A77E37852E0AED10004D75B2 /* UserCoreData.swift in Sources */,
 				A779ED9A2E0AA3B600920C77 /* CoreDataError.swift in Sources */,
@@ -529,6 +559,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A77E378C2E0AF7EA004D75B2 /* MockUserRepository.swift in Sources */,
+				A77E37892E0AF74B004D75B2 /* UserUsecaseTests.swift in Sources */,
 				A779ED8C2E0AA0CB00920C77 /* MyCleanProjectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -556,25 +588,6 @@
 			targetProxy = A779ED632E0AA0BB00920C77 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		A779ED7A2E0AA0C300920C77 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A779ED792E0AA0C300920C77 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		A779ED7C2E0AA0C300920C77 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A779ED7B2E0AA0C300920C77 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A779ED6C2E0AA0BB00920C77 /* Debug */ = {
@@ -672,7 +685,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -692,6 +705,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PODS_XCFRAMEWORKS_BUILD_DIR = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -735,7 +749,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -748,6 +762,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PODS_XCFRAMEWORKS_BUILD_DIR = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
